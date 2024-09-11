@@ -1,7 +1,11 @@
 @echo off
-REM Verificar si se proporcionó un archivo como argumento
-if "%~1"=="" (
-    echo ERROR: No se ha proporcionado el archivo como argumento.
+REM Abrir un cuadro de diálogo para seleccionar un archivo usando PowerShell
+set "FILE_PATH="
+for /f "delims=" %%i in ('powershell -command "& {Add-Type -AssemblyName System.Windows.Forms; $dialog = New-Object System.Windows.Forms.OpenFileDialog; $dialog.Filter = 'Todos los archivos (*.*)|*.*'; $dialog.ShowDialog() | Out-Null; $dialog.FileName}"') do set "FILE_PATH=%%i"
+
+REM Verificar si se ha seleccionado un archivo
+if "%FILE_PATH%"=="" (
+    echo ERROR: No se ha seleccionado ningún archivo.
     exit /b 1
 )
 
@@ -14,7 +18,7 @@ if /I not "%FILE_EXT%"==".epub" (
     set "SCRIPT_PATH=send_mail.py"
     
     REM Ejecutar el script de Python pasando el archivo como argumento
-    python "%SCRIPT_PATH%" "%~1"
+    python "%SCRIPT_PATH%" "%FILE_PATH%"
     
     REM Verificar si hubo algún error en la ejecución de Python
     if errorlevel 1 (
@@ -31,7 +35,7 @@ REM Establecer la ruta al script de Python para archivos EPUB
 set "SCRIPT_PATH=run.py"
 
 REM Ejecutar el script de Python pasando el archivo EPUB como argumento
-python "%SCRIPT_PATH%" "%~1"
+python "%SCRIPT_PATH%" "%FILE_PATH%"
 
 REM Verificar si hubo algún error en la ejecución de Python
 if errorlevel 1 (

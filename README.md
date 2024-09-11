@@ -1,40 +1,20 @@
-# sendMailKindle
- 
-# Guía de Instalación y Uso
+# Enviar Libro a Kindle
 
 ## Dependencias
 
-1. **Calibre**
-   - Es necesario tener Calibre instalado para la gestión de metadatos y el envío de archivos.
-   - Descarga Calibre desde [este enlace](https://calibre-ebook.com/es/download_windows).
-   - La ruta predeterminada de instalación es `C:\\Program Files\\Calibre2`. 
-     - **Nota:** Si Calibre se instala en una ruta diferente, asegúrate de modificar el archivo `config.json` con la ruta correcta después de ejecutar `instalador.bat`.
-
-2. **Cuenta de Correo Electrónico**
-   - Necesitarás una cuenta de correo electrónico que permita el envío de archivos. 
-   - Se recomienda utilizar [GMX](https://www.gmx.es).
-
-3. **Python**
-   - Python es necesario para ejecutar los scripts de Python. 
-   - El archivo `instalador.bat` se encargará de instalar Python automáticamente, si no está ya instalado en tu sistema.
+1. **Calibre**: Es necesario instalar Calibre desde [aquí](https://calibre-ebook.com/es/download_windows). Después de la instalación, revisa si la ruta de instalación es "C:\\Program Files\\Calibre2". Si es diferente, modifica el archivo `config.json` con la ruta correcta.
+2. **Cuenta de Correo**: Necesitarás una cuenta de correo que permita enviar archivos. Se recomienda [gmx.es](https://www.gmx.es).
+3. **Python**: Es necesario, pero será instalado automáticamente al ejecutar `instalador.bat`.
 
 ## Pasos
 
-1. **Ejecutar `instalador.bat`**
-   - Ejecuta `instalador.bat` para instalar Python y configurar el archivo `config.json`.
-   - Aporta la información solicitada durante la ejecución del script.
+1. Ejecuta `instalador.bat` y proporciona la información solicitada para configurar el entorno.
+2. Ejecuta `Enviar Libro a Kindle.bat`.
+3. Selecciona el archivo `.epub` o `.mobi` que deseas enviar a tu Kindle.
+4. Espera a que el archivo se envíe y se muestre en tu Kindle.
 
-2. **Arrastrar el Archivo**
-   - Arrastra un archivo con extensión `.epub` o `.mobi` al archivo `run.bat` para procesarlo.
-   - El archivo será renombrado (si es necesario) y enviado por correo.
+## Notas
 
-3. **Esperar la Recepción en el Kindle**
-   - Espera a que el archivo se muestre en tu dispositivo Kindle.
-
-## Notas Adicionales
-
-- Asegúrate de que el archivo `config.json` esté correctamente configurado con la información de tu cuenta de correo y la ruta de instalación de Calibre.
-- Si encuentras problemas con el envío de correos, verifica la configuración de tu cuenta de correo y la ruta de Calibre en `config.json`.
-
-Si tienes alguna pregunta o problema, no dudes en buscar ayuda en los foros de soporte de Calibre o en el servicio de soporte de tu proveedor de correo electrónico.
+- Asegúrate de que todos los archivos necesarios (`send_mail.py`, `run.py`, `config.json`) estén en el mismo directorio que el archivo `.bat` para un funcionamiento correcto.
+- Si encuentras problemas, verifica la configuración en `config.json` y asegúrate de que Calibre esté instalado en la ruta especificada.
 
