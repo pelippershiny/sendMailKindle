@@ -17,6 +17,21 @@ if %ERRORLEVEL% neq 0 (
     echo Python ya está instalado.
 )
 
+:: Verificar si Calibre está instalado
+if not exist "C:\Program Files\Calibre2\calibre.exe" (
+    echo Calibre no está instalado. Instalando Calibre...
+    :: Descargar el instalador de Calibre
+    powershell -Command "Invoke-WebRequest -Uri https://download.calibre-ebook.com/64bit/calibre-6.15.0.msi -OutFile calibre_installer.msi"
+
+    :: Instalar Calibre
+    msiexec /i calibre_installer.msi /quiet
+
+    :: Limpiar el instalador
+    del calibre_installer.msi
+) else (
+    echo Calibre ya está instalado.
+)
+
 :: Instalar dependencias
 echo Instalando dependencias...
 pip install --upgrade pip
