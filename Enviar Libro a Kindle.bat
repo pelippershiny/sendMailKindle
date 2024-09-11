@@ -9,32 +9,24 @@ if "%FILE_PATH%"=="" (
     exit /b 1
 )
 
+REM Mostrar la ruta del archivo seleccionado
+echo Ruta del archivo seleccionado: %FILE_PATH%
+
 REM Obtener la extensión del archivo
-set "FILE_EXT=%~x1"
+for %%x in ("%FILE_PATH%") do set "FILE_EXT=%%~xx"
 
 REM Comprobar si la extensión es .epub
-if /I not "%FILE_EXT%"==".epub" (
-    REM Establecer la ruta al script de Python para archivos no EPUB
+if /I "%FILE_EXT%"==".epub" (
+    REM Si el archivo es EPUB, redirigir al script run.py
+    echo Redirigiendo al script run.py
+    set "SCRIPT_PATH=run.py"
+) else (
+    REM Si el archivo no es EPUB, redirigir al script send_mail.py
+    echo Redirigiendo al script send_mail.py
     set "SCRIPT_PATH=send_mail.py"
-    
-    REM Ejecutar el script de Python pasando el archivo como argumento
-    python "%SCRIPT_PATH%" "%FILE_PATH%"
-    
-    REM Verificar si hubo algún error en la ejecución de Python
-    if errorlevel 1 (
-        echo ERROR: La ejecución del script de Python falló.
-        exit /b 1
-    )
-    
-    echo El script de Python se ejecutó correctamente.
-    exit /b 0
 )
 
-REM Si la extensión es .epub, continuar con el script actual
-REM Establecer la ruta al script de Python para archivos EPUB
-set "SCRIPT_PATH=run.py"
-
-REM Ejecutar el script de Python pasando el archivo EPUB como argumento
+REM Ejecutar el script de Python pasando el archivo como argumento
 python "%SCRIPT_PATH%" "%FILE_PATH%"
 
 REM Verificar si hubo algún error en la ejecución de Python
